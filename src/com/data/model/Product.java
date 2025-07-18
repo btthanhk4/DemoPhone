@@ -18,6 +18,8 @@ public class Product {
         this.stock = stock;
     }
 
+    // Getter và Setter
+
     public int getId() {
         return id;
     }
@@ -56,5 +58,11 @@ public class Product {
 
     public void setStock(int stock) {
         this.stock = stock;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Product{id=%d, name='%s', price=%d, brand='%s', stock=%d}",
+                id, productName, price, brand, stock);
     }
 }

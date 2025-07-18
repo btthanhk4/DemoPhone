@@ -2,25 +2,29 @@ package com.data.connection;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
 
 public class ConnectionDB {
-    private static final String URL = "jdbc:mysql://localhost:3307/phone_db";
+    private static final String URL = "jdbc:mysql://localhost:3307/phone_db?useSSL=false";
     private static final String USERNAME = "root";
     private static final String PASSWORD = "123456";
 
-    public static Connection openConn() {
-        Connection conn = null;
+    static {
         try {
-            conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            Class.forName("com.mysql.cj.jdbc.Driver"); // Load MySQL Driver
+        } catch (ClassNotFoundException e) {
+            System.out.println("Không tìm thấy MySQL JDBC Driver!");
+            e.printStackTrace();
+        }
+    }
 
-            return conn;
+
+    public static Connection getConnection() {
+        try {
+            return DriverManager.getConnection(URL, USERNAME, PASSWORD);
         } catch (Exception e) {
             System.out.println("Lỗi kết nối CSDL!");
             e.printStackTrace();
         }
-
         return null;
     }
 }
